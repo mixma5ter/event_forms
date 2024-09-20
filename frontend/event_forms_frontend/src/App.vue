@@ -1,15 +1,11 @@
 <template>
-  <div id="app">
-    <FormList/>
-  </div>
+  <router-view/>
 </template>
 
-<script>
-import FormList from './components/FormList.vue'
+<script setup>
 
-export default {
-  components: {
-    FormList
-  }
-}
 </script>
+
+<style lang="scss">
+
+</style>
