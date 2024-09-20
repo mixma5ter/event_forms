@@ -52,12 +52,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",  # Заменить на порт Vue.js приложения
-]
+         'http://localhost:5173',  # Адрес фронтенда
+         # Другие разрешенные источники, если необходимо
+     ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
