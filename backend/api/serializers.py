@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from .models import Form
+from forms.models import Form
 
 
 class FormSerializer(serializers.ModelSerializer):
