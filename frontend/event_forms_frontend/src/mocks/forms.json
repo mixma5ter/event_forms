@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "title": "Тестовая форма 999",
+    "structure": [
+      {
+        "id": 12,
+        "name": "Jack",
+        "description": "Description"
+      }
+    ],
+    "created_at": "2024-09-21T13:55:25.509009+03:00",
+    "updated_at": "2024-09-21T13:55:25.509009+03:00"
+  },
+  {
+    "id": 2,
+    "title": "Тестовая форма 999",
+    "structure": [
+      {
+        "id": 13,
+        "name": "Rick",
+        "description": "Description"
+      }
+    ],
+    "created_at": "2024-09-21T13:56:04.148298+03:00",
+    "updated_at": "2024-09-21T13:56:04.148298+03:00"
+  }
+]

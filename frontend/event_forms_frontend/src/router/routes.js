@@ -1,20 +1,20 @@
 export default [
     {
         path: "/",
-        name: "home",
+        name: "HomeView",
         component: () => import("@/views/HomeView.vue"),
         children: []
     },
     {
         path: "/list",
-        name: "list",
-        component: () => import("@/views/FormList.vue"),
+        name: "FormListView",
+        component: () => import("@/views/FormListView.vue"),
         children: []
     },
     {
         path: "/create",
-        name: "create",
-        component: () => import("@/views/FormCreate.vue"),
+        name: "FormCreateView",
+        component: () => import("@/views/FormCreateView.vue"),
         children: []
     },
 ]
