@@ -48,13 +48,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Должен быть перед 'django.middleware.common.CommonMiddleware'
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -99,11 +98,11 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'event_forms_db',  # Имя вашей локальной базы данных
-            'USER': 'postgres',  # Имя пользователя PostgreSQL
-            'PASSWORD': 'postgres',  # Пароль пользователя PostgreSQL
-            'HOST': 'localhost',  # Или IP-адрес вашего сервера PostgreSQL
-            'PORT': '5432',  # Стандартный порт PostgreSQL
+            'NAME': 'event_forms_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 else:
