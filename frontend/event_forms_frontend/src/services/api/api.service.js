@@ -1,5 +1,7 @@
 import axios, { AxiosError } from "axios";
 
+const apiURL = import.meta.env.VITE_BASE_API_URL
+
 class ApiError extends Error {
     constructor(message, response) {
         super(message);
@@ -9,7 +11,7 @@ class ApiError extends Error {
 
 export class ApiService {
 
-    constructor(baseURL = "http://localhost:8000/api/") { // Базовый URL по умолчанию
+    constructor(baseURL = apiURL) {
         this.baseURL = baseURL;
     }
 
