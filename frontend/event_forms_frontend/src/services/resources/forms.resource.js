@@ -8,4 +8,8 @@ export class FormsResource extends CrudService {
     getForms() {
         return this.get();
     }
+
+    createForm(form) {
+        return this.post(form);
+    }
 }

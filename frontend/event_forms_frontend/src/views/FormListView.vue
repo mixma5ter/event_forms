@@ -2,11 +2,11 @@
   <main class="content">
     <section class="desk">
       <h2>Список форм</h2>
-      <router-link to="/">Главная страница</router-link>
-      <router-link to="/create">Новая форма</router-link>
+      <router-link :to="{ name: 'HomeView' }">Главная страница</router-link>
+      <router-link :to="{ name: 'FormCreateView' }">Новая форма</router-link>
       <ul v-if="forms.length">
         <li v-for="form in forms" :key="form.id" class="">
-          <router-link to="/">{{ form.title }}</router-link>
+          <router-link :to="{ name: 'HomeView' }">{{ form.title }}</router-link>
         </li>
       </ul>
       <p v-else>Форм пока нет.</p>
@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import resources from "@/services/resources";
 import { ref, onMounted } from 'vue';
+import resources from "@/services/resources";
 
 export default {
   setup() {
