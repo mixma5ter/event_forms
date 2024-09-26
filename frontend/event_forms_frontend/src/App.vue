@@ -1,11 +1,11 @@
 <template>
   <app-layout>
-    <router-view />
+    <router-view class="content" />
   </app-layout>
 </template>
 
 <script setup>
-import AppLayout from "@/layouts/AppLayout.vue";
+import AppLayout from "@/views/layouts/AppLayout.vue";
 </script>
 
 <style>
@@ -22,5 +22,13 @@ body {
 
 a {
   color: var(--text-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+.content {
+  padding: 20px;
 }
 </style>

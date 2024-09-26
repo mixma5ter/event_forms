@@ -30,9 +30,8 @@ export default {
   position: relative;
   z-index: 2;
   display: flex;
-  padding: 0 2.12%;
+  padding: 20px;
   background-color: var(--primary-color);
-  box-shadow: var(--secondary-color);
   font-family: "Roboto", sans-serif;
   font-weight: 700;
 }

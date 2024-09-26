@@ -26,6 +26,6 @@ export default {
   z-index: 2;
   display: flex;
   flex-direction: column; /* Положение контента футера по вертикали */
-  padding: 0 2.12%;
+  padding: 20px;
 }
 </style>

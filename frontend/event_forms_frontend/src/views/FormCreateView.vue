@@ -12,17 +12,23 @@
             class="form-title-input"
         />
 
-        <form-field
-            v-for="(field, index) in formFields"
-            :key="index"
-            :field.sync="formFields[index]"
-            :placeholder="`Поле ${index + 1}`"
-            @remove="removeField(index)"
-        />
+        <draggable
+            v-model="formFields"
+            itemKey="id"
+            @end="onDragEnd"
+            handle=".drag-handle"
+        >
+          <template #item="{ element, index }">
+            <form-field
+                :field.sync="formFields[index]"
+                :placeholder="`Поле ${index + 1}`"
+                @remove="removeField(index)"
+            />
+          </template>
+        </draggable>
 
         <button @click="addField">Добавить поле</button>
       </div>
-
       <button @click="saveForm">Сохранить форму</button>
     </section>
   </main>
@@ -31,34 +37,35 @@
 <script>
 import { ref } from 'vue';
 import resources from "@/services/resources";
-import FormField from '@/common/FormField.vue';
+import FormField from '@/views/components/FormField.vue';
+import Draggable from 'vuedraggable';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   components: {
-    FormField
+    FormField,
+    Draggable
   },
   setup() {
-    // Название формы
     const formTitle = ref('');
-
-    // Поля формы
     const formFields = ref([
-      { title: 'Фамилия' },
-      { title: 'Имя' },
-      { title: 'Отчество' }
+      { id: uuidv4(), title: 'Фамилия' },
+      { id: uuidv4(), title: 'Имя' },
+      { id: uuidv4(), title: 'Отчество' }
     ]);
 
-    // Добавление нового поля
     const addField = () => {
-      formFields.value.push({ title: '' });
+      formFields.value.push({ id: uuidv4(), title: '' });
     };
 
-    // Удаление поля
     const removeField = (index) => {
       formFields.value.splice(index, 1);
     };
 
-    // Сохранение формы
+    const onDragEnd = (event) => {
+      console.log('Поле перемещено', formFields.value);
+    };
+
     const saveForm = async () => {
       const newForm = {
         title: formTitle.value || 'Без названия',
@@ -69,8 +76,8 @@ export default {
         const res = await resources.forms.createForm(newForm);
         if (res.__state === "success") {
           console.log('Форма успешно сохранена');
-          formTitle.value = '';  // Очистка названия формы
-          formFields.value = []; // Очистка полей формы
+          formTitle.value = '';
+          formFields.value = [];
         } else {
           console.error('Ошибка сохранения формы:', res.data);
         }
@@ -79,7 +86,7 @@ export default {
       }
     };
 
-    return { formTitle, formFields, addField, removeField, saveForm };
+    return { formTitle, formFields, addField, removeField, saveForm, onDragEnd };
   }
 };
 </script>
@@ -90,11 +97,11 @@ export default {
 }
 
 .form-title-input {
-  display: block;
-  width: 100%;
   margin-bottom: 15px;
+  border: 1px solid #ccc;
   padding: 10px;
-  font-size: 16px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
 }
 
 .form-builder {
@@ -102,10 +109,8 @@ export default {
 }
 
 button {
-  display: block;
   margin-top: 10px;
   padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
 }
 </style>
