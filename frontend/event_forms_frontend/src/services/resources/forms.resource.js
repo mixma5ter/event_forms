@@ -5,8 +5,13 @@ export class FormsResource extends CrudService {
         super("forms/");
     }
 
-    getForms() {
-        return this.get();
+    getForms(params = {}) {
+        let url = "";
+        if (Object.keys(params).length > 0) {
+            const searchParams = new URLSearchParams(params);
+            url = `?${searchParams.toString()}`;
+        }
+        return this.get(url);
     }
 
     createForm(form) {
