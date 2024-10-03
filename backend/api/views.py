@@ -9,11 +9,15 @@ from forms.models import Form
 from .serializers import FormSerializer
 
 
+FORMS_PER_PAGE = 12
+MAX_PAGE_SIZE = 100
+
+
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 9
+    page_size = FORMS_PER_PAGE
     page_query_param = 'page'
     page_size_query_param = 'page_size'
-    max_page_size = 100
+    max_page_size = MAX_PAGE_SIZE
 
     def get_paginated_response(self, data):
         return Response({
