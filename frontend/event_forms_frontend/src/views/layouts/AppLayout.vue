@@ -1,12 +1,22 @@
 <template>
   <div>
-    <app-header />
-    <slot />
-    <app-footer />
+    <app-header/>
+    <app-navigation/>
+    <slot/>
+    <app-footer/>
   </div>
 </template>
 
-<script setup>
-import AppHeader from "./AppHeader.vue";
-import AppFooter from "./AppFooter.vue";
+<script>
+import AppHeader from "@/views/layouts/AppHeader.vue";
+import AppFooter from "@/views/layouts/AppFooter.vue";
+import AppNavigation from "@/views/components/AppNavigation.vue";
+
+export default {
+  components: {
+    AppHeader,
+    AppFooter,
+    AppNavigation,
+  },
+};
 </script>

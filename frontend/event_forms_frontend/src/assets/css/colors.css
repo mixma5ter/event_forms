@@ -1,0 +1,17 @@
+:root {
+    --base-color: #fdfdfd;
+    --primary-color-100: #063057;
+    --primary-color-200: #414f73;
+    --primary-color-300: #7f8cad;
+    --secondary-color-100: #fda751;
+    --text-color: #fdfdfe; /* Цвет текста */
+    --background-color: #7f8cad; /* Цвет фона */
+    --border-color: #cccccc; /* Цвет границы */
+}
+
+/* Дополнительные цвета */
+:root {
+    --success-color: #28a745; /* Успех */
+    --danger-color: #dc3545; /* Ошибка */
+    --warning-color: #ffc107; /* Предупреждение */
+}
