@@ -2,12 +2,16 @@
   <main class="content">
     <section class="desk">
       <h2>Список форм</h2>
-      <ul v-if="forms.length">
-        <li v-for="form in forms" :key="form.id">
-          <router-link :to="{ name: 'FormUpdateView', params: { id: form.id } }">{{ form.title }}</router-link>
-        </li>
-      </ul>
-      <p v-else>Форм пока нет.</p>
+
+      <div class="form-grid">
+        <FormCard
+            v-for="form in forms"
+            :key="form.id"
+            :form="form"
+        />
+      </div>
+
+      <p v-if="!forms.length">Форм пока нет.</p>
 
       <Pagination
           :current-page="currentPage"
@@ -22,10 +26,12 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import resources from "@/services/resources";
 import Pagination from "@/views/components/Pagination.vue";
+import FormCard from '@/views/components/FormCard.vue';
 
 export default {
   components: {
     Pagination,
+    FormCard,
   },
   setup() {
     const forms = ref([]);
@@ -89,3 +95,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin: 2rem 0;
+  gap: 1rem;
+}
+</style>
