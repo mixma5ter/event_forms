@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,11 +9,29 @@ from forms.models import Form
 from .serializers import FormSerializer
 
 
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 9
+    page_query_param = 'page'
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+    def get_paginated_response(self, data):
+        return Response({
+            'links': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link()
+            },
+            'total_pages': self.page.paginator.num_pages,  # добавляем для общего количества страниц
+            'count': self.page.paginator.count,  # общее количество элементов
+            'results': data
+        })
+
+
 class FormAPIView(APIView):
     """Класс обработки API запросов GET, POST, PUT, DELETE."""
 
-    # Позволяет делать запросы к вашему API без проверки csrf токена
     permission_classes = [AllowAny]
+    pagination_class = StandardResultsSetPagination
 
     def get_object(self, id):
         """Получение формы по ID или возврат 404."""
@@ -21,14 +40,23 @@ class FormAPIView(APIView):
 
     def get(self, request, id=None):
         """Получение формы по ID или списка всех форм."""
-        if id is None:
-            forms = Form.objects.all().order_by('-updated_at')
-            serializer = FormSerializer(forms, many=True)
-            return Response(serializer.data)
-        else:
+        if id is not None:
+            # Запрос на получение одной формы по ID
             form = self.get_object(id)
             serializer = FormSerializer(form)
             return Response(serializer.data)
+        else:
+            # Запрос на получение списка форм
+            forms = Form.objects.all().order_by('-updated_at')
+            paginator = self.pagination_class()
+            page = paginator.paginate_queryset(forms, request)
+
+            if page is not None:
+                serializer = FormSerializer(page, many=True)
+                return paginator.get_paginated_response(serializer.data)
+            else:
+                serializer = FormSerializer(forms, many=True)
+                return Response(serializer.data)
 
     def post(self, request):
         """Создание формы."""
