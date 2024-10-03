@@ -15,10 +15,10 @@ export class CrudService extends ApiService {
     }
 
     put(entity) {
-        return this.$put(`${this.resource}/${entity.id}`, entity);
+        return this.$put(`${this.resource}${entity.id}/`, entity);
     }
 
-    delete(id) {
-        return this.$delete(`${this.resource}/${id}`);
+    delete(entity) {
+        return this.$delete(`${this.resource}${entity.id}`);
     }
 }

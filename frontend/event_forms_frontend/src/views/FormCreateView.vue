@@ -2,16 +2,12 @@
   <main class="content">
     <section class="desk">
       <h2>Конструктор форм</h2>
-      <router-link :to="{ name: 'HomeView' }">Главная страница</router-link>
-      <router-link :to="{ name: 'FormListView' }">Список форм</router-link>
-
       <div class="form-builder">
         <input
             v-model="formTitle"
             placeholder="Название формы"
             class="form-title-input"
         />
-
         <draggable
             v-model="formFields"
             itemKey="id"
@@ -26,7 +22,6 @@
             />
           </template>
         </draggable>
-
         <button @click="addField">Добавить поле</button>
       </div>
       <button @click="saveForm">Сохранить форму</button>
@@ -36,10 +31,11 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'; // Импортируем useRouter
+import { v4 as uuidv4 } from 'uuid';
 import resources from "@/services/resources";
 import FormField from '@/views/components/FormField.vue';
 import Draggable from 'vuedraggable';
-import { v4 as uuidv4 } from 'uuid';
 
 export default {
   components: {
@@ -47,6 +43,7 @@ export default {
     Draggable
   },
   setup() {
+    const router = useRouter(); // Получаем экземпляр маршрутизатора
     const formTitle = ref('');
     const formFields = ref([
       { id: uuidv4(), title: 'Фамилия' },
@@ -76,6 +73,13 @@ export default {
         const res = await resources.forms.createForm(newForm);
         if (res.__state === "success") {
           console.log('Форма успешно сохранена');
+
+          // Получение ID новой формы
+          const newFormId = res.data.id;
+          // Переадресация на FormUpdateView
+          await router.push({name: 'FormUpdateView', params: {id: newFormId}});
+
+          // Очищаем значения формы, но это не обязательно, так как будет переход на новый маршрут
           formTitle.value = '';
           formFields.value = [];
         } else {

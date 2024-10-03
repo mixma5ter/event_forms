@@ -17,4 +17,10 @@ export default [
         component: () => import("@/views/FormCreateView.vue"),
         children: []
     },
+    {
+        path: "/update/:id",
+        name: "FormUpdateView",
+        component: () => import("@/views/FormUpdateView.vue"),
+        children: []
+    },
 ]

@@ -12,4 +12,12 @@ export class FormsResource extends CrudService {
     createForm(form) {
         return this.post(form);
     }
+
+    getFormById(formId) {
+        return this.$get(`${this.resource}${formId}`);
+    }
+
+    updateForm(form) {
+        return this.put(form);
+    }
 }
