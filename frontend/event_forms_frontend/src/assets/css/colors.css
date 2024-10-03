@@ -4,8 +4,8 @@
     --primary-color-200: #414f73;
     --primary-color-300: #7f8cad;
     --secondary-color-100: #fda751;
-    --text-color: #fdfdfe; /* Цвет текста */
-    --background-color: #7f8cad; /* Цвет фона */
+    --text-color: #fdfdfd; /* Цвет текста */
+    --background-color: #5a637c; /* Цвет фона */
     --border-color: #cccccc; /* Цвет границы */
 }
 

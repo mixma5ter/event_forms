@@ -28,15 +28,16 @@ export default {
 <style scoped>
 .form-field {
   margin-bottom: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   padding: 8px;
-  background-color: #f9f9f9;
+  background-color: var(--base-color);
   border-radius: 4px;
 }
 
 .drag-handle {
   cursor: pointer;
   margin-right: 8px;
+  color: var(--primary-color-100);
 }
 
 button {

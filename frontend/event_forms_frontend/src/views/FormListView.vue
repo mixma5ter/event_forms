@@ -9,41 +9,11 @@
       </ul>
       <p v-else>Форм пока нет.</p>
 
-      <nav aria-label="Page navigation" v-if="totalPages > 1">
-        <ul class="pagination">
-          <li v-if="currentPage > 1" class="page-item">
-            <a class="page-link" href="#" aria-label="Previous" @click.prevent="goToPage(currentPage - 1)">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-
-          <li class="page-item" :class="{ active: currentPage === 1 }">
-            <a class="page-link" href="#" @click.prevent="goToPage(1)">1</a>
-          </li>
-
-          <li v-if="currentPage > 3" class="page-item disabled">
-            <span class="page-link">...</span>
-          </li>
-
-          <li class="page-item" v-for="page in visiblePages" :key="page" :class="{ active: currentPage === page }">
-            <a class="page-link" href="#" @click.prevent="goToPage(page)">{{ page }}</a>
-          </li>
-
-          <li v-if="currentPage < totalPages - 2" class="page-item disabled">
-            <span class="page-link">...</span>
-          </li>
-
-          <li class="page-item" :class="{ active: currentPage === totalPages }">
-            <a class="page-link" href="#" @click.prevent="goToPage(totalPages)">{{ totalPages }}</a>
-          </li>
-
-          <li v-if="currentPage < totalPages" class="page-item">
-            <a class="page-link" href="#" aria-label="Next" @click.prevent="goToPage(currentPage + 1)">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Pagination
+          :current-page="currentPage"
+          :total-pages="totalPages"
+          @update:current-page="currentPage = $event"
+      />
     </section>
   </main>
 </template>
@@ -51,8 +21,12 @@
 <script>
 import { ref, onMounted, computed, watch } from 'vue';
 import resources from "@/services/resources";
+import Pagination from "@/views/components/Pagination.vue";
 
 export default {
+  components: {
+    Pagination,
+  },
   setup() {
     const forms = ref([]);
     const internalCurrentPage = ref(1);
