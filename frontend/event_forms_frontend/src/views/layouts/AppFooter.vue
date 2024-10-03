@@ -1,16 +1,18 @@
 <template>
   <footer class="footer">
-    <div class="footer__content">
-      <p>
+    <div class="content">
+      <div class="footer__content">
+        <p>
         <span>
           <a href="https://mcko.ru/">
             МОСКОВСКИЙ ЦЕНТР КАЧЕСТВА ОБРАЗОВАНИЯ
           </a>
         </span>
-      </p>
-      <p>
-        {{ currentYear }} © Все права защищены
-      </p>
+        </p>
+        <p>
+          {{ currentYear }} © Все права защищены
+        </p>
+      </div>
     </div>
   </footer>
 </template>
@@ -20,7 +22,7 @@ export default {
   name: "AppFooter",
   setup() {
     const currentYear = new Date().getFullYear();
-    return { currentYear };
+    return {currentYear};
   }
 }
 </script>

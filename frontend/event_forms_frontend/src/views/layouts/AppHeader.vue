@@ -1,14 +1,16 @@
 <template>
   <header class="header">
-    <div class="header__logo">
-      <router-link :to="{ name: 'HomeView' }" class="">
-        <img
-            src="@/assets/img/mcko_logo_250_250.png"
-            alt=""
-            width="100"
-            height="100"
-        />
-      </router-link>
+    <div class="content">
+      <div class="header__logo">
+        <router-link :to="{ name: 'HomeView' }" class="">
+          <img
+              src="@/assets/img/mcko_logo_250_250.png"
+              alt=""
+              width="100"
+              height="100"
+          />
+        </router-link>
+      </div>
     </div>
   </header>
 </template>
