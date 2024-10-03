@@ -1,13 +1,13 @@
 <template>
   <nav class="app-navigation">
     <ul>
-      <li>
+      <li v-if="$route.name !== 'HomeView'">
         <router-link :to="{ name: 'HomeView' }">Главная страница</router-link>
       </li>
-      <li>
+      <li v-if="$route.name !== 'FormListView'">
         <router-link :to="{ name: 'FormListView' }">Список форм</router-link>
       </li>
-      <li>
+      <li v-if="$route.name !== 'FormCreateView'">
         <router-link :to="{ name: 'FormCreateView' }">Новая форма</router-link>
       </li>
     </ul>
